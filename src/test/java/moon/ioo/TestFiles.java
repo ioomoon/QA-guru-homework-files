@@ -21,14 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.qameta.allure.selenide.AllureSelenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 
-public class TestFiles {
+public class TestFiles extends BaseTest {
 
     @Test
     @Owner("ioomoon")
     @DisplayName("Filename should appear after upload")
     void uploadFile() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         open(UPLOAD_PAGE);
         $("#uploadFile").uploadFromClasspath(SAMPLE_FILE_NAME);
         $("#uploadedFilePath").shouldHave(text(SAMPLE_FILE_NAME));
@@ -38,8 +36,6 @@ public class TestFiles {
     @Owner("ioomoon")
     @DisplayName("Download TXT file and check it's content")
     void downloadTXTFile() throws IOException {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         open(DOWNLOAD_TXT_PAGE);
         File download = $("#downloadButton").download();
         String fileContent = IOUtils.toString(new FileReader(download));
@@ -50,8 +46,6 @@ public class TestFiles {
     @Owner("ioomoon")
     @DisplayName("Download PDF file and check it's content")
     void downloadPDFFile() throws IOException {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         open(DOWNLOAD_PDF_PAGE);
 
         File pdf = $(byText("Download sample pdf file")).download();
@@ -63,8 +57,6 @@ public class TestFiles {
     @Owner("ioomoon")
     @DisplayName("Download XLS file and check it's content")
     void downloadXLSFile() throws IOException {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         open(DOWNLOAD_XLS_PAGE);
 
         File file = $(byText("Download sample xls file")).download();
